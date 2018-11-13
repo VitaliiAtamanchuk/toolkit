@@ -63,25 +63,3 @@ def get_stats(project_path):
     # print(commit.stats.files)
     retval.append(item)
   return retval
-
-
-def print_commit(commit):
-    print('----'*10)
-    print(str(commit.hexsha))
-    print("\"{}\" by {} ({})".format(commit.summary,
-                                     commit.author.name,
-                                     commit.author.email))
-    print(str(commit.authored_datetime))
-    print(str("count: {} and size: {}".format(commit.count(),
-                                              commit.size)))
-
-if __name__ == '__main__':
-  import time
-  start_time = time.clock()
-  # outputTree = get_tree('.')
-  # val = get_stats('.')
-  # print(val)
-  # print(time.clock() - start_time, "seconds")
-  # print(json.dumps(outputTree, indent=2))
-  from subprocess import run
-  run(["dir"])
