@@ -14,8 +14,7 @@
         <v-container grid-list-md>
           <v-layout wrap>
             <v-flex xs12>
-              <v-text-field v-model='projectPath' height='80'
-                label="Project path" box append-icon="place" />
+              <PathInput />
             </v-flex>
           </v-layout>
         </v-container>
@@ -32,11 +31,16 @@
 </template>
 
 <script>
+import PathInput from '@/components/PathInput'
+
 export default {
+  components: {PathInput},
   data () {
     return {
       dialog: false,
       projectPath: '',
+      search: null,
+      dirs: ['home', 'vitalii', 'src', 'POLECMNIE']
     }
   },
   methods: {

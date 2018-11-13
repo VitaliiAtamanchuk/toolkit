@@ -39,9 +39,7 @@
 import AddProject from '@/components/AddProject'
 
 export default {
-  components:{
-    AddProject,
-  }
+  components:{AddProject}
 }
 </script>
 

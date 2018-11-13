@@ -1,5 +1,7 @@
 <template lang="html">
-  
+  <v-container>
+    Postgres
+  </v-container>
 </template>
 
 <script>
