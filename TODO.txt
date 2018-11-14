@@ -1,5 +1,6 @@
-TODO: add cors
 TODO: how to get POST data from request?
+await request.json()
+
 TODO: add project model
 TODO: create project instance
 TODO: add project API endpoint

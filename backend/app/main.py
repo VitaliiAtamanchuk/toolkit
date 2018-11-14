@@ -4,7 +4,7 @@ from pathlib import Path
 import aiohttp_jinja2
 import jinja2
 from aiohttp import web
-
+import aiohttp_cors
 import aiohttp_session
 from aiohttp_session.cookie_storage import EncryptedCookieStorage
 from aiopg.sa import create_engine
@@ -59,6 +59,7 @@ async def create_app():
         name='backend',
         settings=settings
     )
+    cors = aiohttp_cors.setup(app)
 
     jinja2_loader = jinja2.FileSystemLoader(str(THIS_DIR / 'templates'))
     aiohttp_jinja2.setup(app, loader=jinja2_loader)
