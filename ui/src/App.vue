@@ -10,7 +10,7 @@
     <v-content>
       <router-view/>
     </v-content>
-    <v-footer color='grey darken-1'>
+    <v-footer app color='grey darken-1'>
       <v-spacer />
       <v-btn icon @click='dark = !dark'>
         <v-icon>style</v-icon>

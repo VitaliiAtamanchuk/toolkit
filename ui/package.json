@@ -19,6 +19,7 @@
     "xterm": "^3.8.0"
   },
   "devDependencies": {
+    "@mdi/font": "^3.0.39",
     "@vue/cli-plugin-babel": "^3.0.4",
     "@vue/cli-plugin-pwa": "^3.0.4",
     "@vue/cli-service": "^3.0.4",

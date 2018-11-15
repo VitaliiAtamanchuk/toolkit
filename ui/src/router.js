@@ -4,6 +4,7 @@ import Router from 'vue-router'
 import Home from './views/Home.vue'
 import Projects from './views/Projects.vue'
 import Postgres from './views/Postgres.vue'
+import ProjectView from './views/ProjectView.vue'
 
 Vue.use(Router)
 
@@ -23,6 +24,11 @@ export default new Router({
       path: '/postgres/',
       name: 'postgres',
       component: Postgres
+    },
+    {
+      path: '/project-view/',
+      name: 'projectView',
+      component: ProjectView
     }
   ]
 })
