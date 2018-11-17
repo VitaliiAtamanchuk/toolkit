@@ -1,4 +1,4 @@
-try:
-    print(1/0)
-except Exception as e:
-    raise RuntimeError("Something bad happened") from e
+if True:
+    i = 10
+# TODO: first line
+print(i)
