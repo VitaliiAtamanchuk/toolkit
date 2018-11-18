@@ -5,9 +5,11 @@ import Home from './views/Home.vue'
 import Projects from './views/Projects.vue'
 import Postgres from './views/Postgres.vue'
 import ProjectView from './views/ProjectView.vue'
+import ProjectTodos from './views/ProjectTodos.vue'
+import ProjectGitStats from './views/ProjectGitStats.vue'
 
 Vue.use(Router)
-
+//TODO: add title support for every page
 export default new Router({
   routes: [
     {
@@ -26,9 +28,24 @@ export default new Router({
       component: Postgres
     },
     {
-      path: '/project-view/',
+      path: '/project-view/:id',
+      props: true,
       name: 'projectView',
-      component: ProjectView
+      component: ProjectView,
+      children: [
+        {
+          path: 'todos',
+          props: true,
+          name: 'projectTodos',
+          component: ProjectTodos
+        },
+        {
+          path: 'git/stats',
+          props: true,
+          name: 'projectGitStats',
+          component: ProjectGitStats
+        }
+      ]
     }
   ]
 })

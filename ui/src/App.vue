@@ -20,7 +20,7 @@
 </template>
 
 <script>
-
+// TODO: show page title in toolbar title
 export default {
   name: 'App',
   data () {

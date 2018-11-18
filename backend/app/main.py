@@ -44,8 +44,17 @@ async def cleanup(app: web.Application):
 
 def setup_routes(app):
     from .routes import routers
+    cors_config = {}
+    cors_config['http://localhost:8080'] = aiohttp_cors.ResourceOptions(
+        allow_credentials=True,
+        expose_headers="*",
+        allow_headers="*",
+        max_age=3600,
+    )
+    cors = aiohttp_cors.setup(app, defaults=cors_config)
     for router in routers:
-        app.router.add_route(router[0], router[1], router[2])
+        res = app.router.add_route(router[0], router[1], router[2])
+        cors.add(res)
     # app.router.add_get('/', index, name='index')
     # app.router.add_route('*', '/messages', messages, name='messages')
     # app.router.add_get('/messages/data', message_data, name='message-data')
@@ -59,7 +68,6 @@ async def create_app():
         name='backend',
         settings=settings
     )
-    cors = aiohttp_cors.setup(app)
 
     jinja2_loader = jinja2.FileSystemLoader(str(THIS_DIR / 'templates'))
     aiohttp_jinja2.setup(app, loader=jinja2_loader)

@@ -14,7 +14,7 @@
         <v-container grid-list-md>
           <v-layout wrap>
             <v-flex xs12>
-              <PathInput />
+              <PathInput :path.sync='path' />
             </v-flex>
           </v-layout>
         </v-container>
@@ -23,7 +23,7 @@
       <v-card-actions>
         <v-spacer></v-spacer>
         <v-btn color="blue darken-1" flat @click.native="closeDialog()">Close</v-btn>
-        <v-btn dark color="blue darken-1" @click.native="closeDialog()">Submit</v-btn>
+        <v-btn dark color="blue darken-1" @click.native="submit()">Submit</v-btn>
       </v-card-actions>
 
     </v-card>
@@ -32,11 +32,13 @@
 
 <script>
 import PathInput from '@/components/PathInput'
+import {projectCreate} from '@/api/project'
 
 export default {
   components: {PathInput},
   data () {
     return {
+      path: '',
       dialog: false,
       projectPath: '',
       search: null,
@@ -45,6 +47,10 @@ export default {
   },
   methods: {
     closeDialog () {
+      this.dialog = false
+    },
+    submit () {
+      projectCreate(this.path)
       this.dialog = false
     }
   }
