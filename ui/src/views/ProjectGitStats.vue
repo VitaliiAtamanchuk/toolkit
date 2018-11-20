@@ -4,7 +4,7 @@
       <v-combobox solo label='Select authors' chips />
       <v-select solo label='Group by date range' chips
         :items='dateRanges' v-model='dateRangeSelected'/>
-      <v-select solo label="Type of values" chips 
+      <v-select solo label="Type of values" chips
         :items='valTypes' v-model='valTypeSelected'/>
     </v-layout>
     <d3-bar-chart
@@ -25,7 +25,7 @@ export default {
     return {
       valTypes: ['lines', 'insertions', 'deletions'],
       valTypeSelected: 'lines',
-      dateRanges: ['None', 'Week', 'Month', 'Year'],
+      dateRanges: ['None', 'Day', 'Week', 'Month', 'Year'],
       dateRangeSelected: 'None',
       options: {},
       stats: [],
@@ -37,7 +37,9 @@ export default {
   methods: {
     getDate (date) {
       let dateGroup = null
-      if (this.dateRangeSelected == 'Week') {
+      if (this.dateRangeSelected == 'Day') {
+        dateGroup = date.substr(0, 10)
+      } else if (this.dateRangeSelected == 'Week') {
         dateGroup = moment(date).year()+'-'+moment(date).week()
       } else if (this.dateRangeSelected == 'Month') {
         const month = parseInt(moment(date).month()) + 1
@@ -64,6 +66,7 @@ export default {
       let d3DataY = []
       let d3Tooltip = []
       console.log('-----------------------------')
+      console.log(this.stats)
       let items = this.stats.reduce( (acc, item) => {
         const date = item['date']
         const value = item[this.valTypeSelected]

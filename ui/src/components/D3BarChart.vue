@@ -12,7 +12,7 @@
 import * as d3 from "d3"
 
 const WRAPPER = {
-  width: 900,
+  width: 1200,
   height: 500,
   padding: 60,
   background: '#fff'
@@ -64,7 +64,6 @@ export default {
   },
   watch: {
     d3Data () {
-      console.log(this.d3Data)
       document.getElementById(this.id).innerHTML = ''
       d3.select(`#${this.id}`)
         .append('svg')
@@ -76,7 +75,7 @@ export default {
         .append('div')
         .attr('class', 'tooltip elevation-3')
         .style('opacity', 0);
-      
+
       // X axis
       this.axis.x.values = d3.scaleLinear()
         .domain([d3.min(this.d3Data.x), d3.max(this.d3Data.x)])

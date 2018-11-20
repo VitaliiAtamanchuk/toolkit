@@ -10,7 +10,7 @@ import aiofiles
 
 
 FILES_TO_SKIP = ['.svg', '.png', '.ico', '.lock', '.log', '.jpg', '.PNG']
-FILEEXTS_TO_INCLUDE = ['.py', '.js', '.vue', '.spec', '.c', '.css', 
+FILEEXTS_TO_INCLUDE = ['.py', '.js', '.vue', '.spec', '.c', '.css',
   '.html', '.mako', '.sass', '.scss', '.cpp']
 FILES_REGEX_TO_SKIP_ATGITSTATS = [r'_generated.py', r'alembic_default/versions']
 
@@ -28,6 +28,7 @@ def get_all_todos(_path, project_path=None, _cache={}):
     if curFile.name.startswith('.') \
       or curFile.name == 'node_modules'\
       or curFile.name == 'public'\
+      or curFile.name == 'htmlcov'\
       or curFile.name == '__pycache__':
       continue
     abs_path = str(curFile.resolve())
@@ -38,7 +39,7 @@ def get_all_todos(_path, project_path=None, _cache={}):
     else:
       if curFile.suffix in FILES_TO_SKIP:
         continue
-      
+
       todos_num, todos = get_todos(abs_path, project_path)
       for t in todos:
         authors.add(t['author'])
@@ -64,6 +65,7 @@ def get_tree(_path, project_path=None, _cache={}):
     if curFile.name.startswith('.') \
       or curFile.name == 'node_modules'\
       or curFile.name == 'public'\
+      or curFile.name == 'htmlcov'\
       or curFile.name == '__pycache__':
       continue
     abs_path = str(curFile.resolve())
