@@ -64,6 +64,7 @@ export default {
   },
   watch: {
     d3Data () {
+      console.log(this.d3Data)
       document.getElementById(this.id).innerHTML = ''
       d3.select(`#${this.id}`)
         .append('svg')

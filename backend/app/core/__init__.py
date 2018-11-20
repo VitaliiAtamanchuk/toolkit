@@ -6,6 +6,7 @@ import re
 
 from git import Repo
 import git.exc
+import aiofiles
 
 
 FILES_TO_SKIP = ['.svg', '.png', '.ico', '.lock', '.log', '.jpg', '.PNG']
@@ -52,8 +53,8 @@ def get_all_todos(_path, project_path=None, _cache={}):
 
 
 def get_tree(_path, project_path=None, _cache={}):
-  if (_path, project_path) in _cache:
-    return _cache[(_path, project_path)]
+  # if (_path, project_path) in _cache:
+  #   return _cache[(_path, project_path)]
   if project_path is None:
     project_path = _path
   path = pathlib.Path(_path)
@@ -71,14 +72,14 @@ def get_tree(_path, project_path=None, _cache={}):
       'name': curFile.name,
     }
     if curFile.is_dir():
-      item['children'] =  get_tree(abs_path, project_path)
+      item['children'] = get_tree(abs_path, project_path)
       item['todos_num'] = sum(i['todos_num'] for i in item['children'])
     else:
       extension = curFile.suffix
       # Could be file name Makefile so the default is txt
       item['file'] = extension[1:] if extension else 'txt'
       if extension not in FILES_TO_SKIP:
-        item['todos_num'] = get_todos(abs_path, project_path, True)[0]
+        item['todos_num'] = (get_todos(abs_path, project_path, True))[0]
       else:
         item['todos_num'] = 0
     outputTree.append(item)
@@ -150,7 +151,6 @@ def get_stats(project_path,_cache={}):
       if not any([name.endswith(ext) for ext in FILEEXTS_TO_INCLUDE]):
         continue
       if any([re.search(i, name) for i in FILES_REGEX_TO_SKIP_ATGITSTATS]):
-        print(f'Skipping {name} file')
         continue
       item['insertions'] += val['insertions']
       item['deletions'] += val['deletions']

@@ -35,6 +35,20 @@ export default {
     this.fetchData()
   },
   methods: {
+    getDate (date) {
+      let dateGroup = null
+      if (this.dateRangeSelected == 'Week') {
+        dateGroup = moment(date).year()+'-'+moment(date).week()
+      } else if (this.dateRangeSelected == 'Month') {
+        const month = parseInt(moment(date).month()) + 1
+        dateGroup = moment(date).year()+'-'+month.toString()
+      } else if (this.dateRangeSelected == 'Year') {
+        dateGroup = moment(date).year()
+      } else {
+        dateGroup = date
+      }
+      return dateGroup
+    },
     fetchData () {
       projectGetGitStat(this.id).then(resp => {
         this.stats = resp.data.stats
@@ -53,17 +67,7 @@ export default {
       let items = this.stats.reduce( (acc, item) => {
         const date = item['date']
         const value = item[this.valTypeSelected]
-        let dateGroup = null
-        if (this.dateRangeSelected == 'Week') {
-          dateGroup = moment(date).year()+'-'+moment(date).week()
-        } else if (this.dateRangeSelected == 'Month') {
-          const month = parseInt(moment(date).month()) + 1
-          dateGroup = moment(date).year()+'-'+month.toString()
-        } else if (this.dateRangeSelected == 'Year') {
-          dateGroup = moment(date).year()
-        } else {
-          dateGroup = date
-        }
+        let dateGroup = this.getDate(date)
         if (typeof acc[dateGroup] === 'undefined') {
           acc[dateGroup] = 0
         }
@@ -73,7 +77,7 @@ export default {
       for (let i in items) {
         let date = i
         let value = items[i]
-        d3DataX.unshift(+date.substr(6, 2))
+        d3DataX.unshift(date)
         d3DataY.unshift(value)
         d3Tooltip.unshift(this.formatTooltipData(date, value))
       }
