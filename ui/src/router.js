@@ -7,6 +7,7 @@ import Postgres from './views/Postgres.vue'
 import ProjectView from './views/ProjectView.vue'
 import ProjectTodos from './views/ProjectTodos.vue'
 import ProjectGitStats from './views/ProjectGitStats.vue'
+import ProjectAnalyzeVue from './views/ProjectAnalyzeVue.vue'
 
 Vue.use(Router)
 //TODO: add title support for every page
@@ -44,6 +45,12 @@ export default new Router({
           props: true,
           name: 'projectGitStats',
           component: ProjectGitStats
+        },
+        {
+          path: 'analyze-vue-code/',
+          props: true,
+          name: 'projectAnalyzeVue',
+          component: ProjectAnalyzeVue
         }
       ]
     }

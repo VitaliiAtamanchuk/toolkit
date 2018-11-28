@@ -51,6 +51,12 @@ def setup_routes(app):
         allow_headers="*",
         max_age=3600,
     )
+    cors_config['http://localhost:8081'] = aiohttp_cors.ResourceOptions(
+        allow_credentials=True,
+        expose_headers="*",
+        allow_headers="*",
+        max_age=3600,
+    )
     cors = aiohttp_cors.setup(app, defaults=cors_config)
     for router in routers:
         res = app.router.add_route(router[0], router[1], router[2])

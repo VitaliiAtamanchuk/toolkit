@@ -26,6 +26,6 @@
       <TheFilters />
     </v-flex>
     <v-flex xs7 class='px-2 mt-2'>
-      <TheMain />
+      <TheMain asdSds='as' />
     </v-flex>
   </v-layout>

@@ -7,6 +7,7 @@ from aiohttp_session import get_session
 
 from .models import sa_messages
 
+import json
 
 @template('index.jinja')
 async def index(request):

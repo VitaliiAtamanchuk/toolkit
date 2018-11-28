@@ -12,7 +12,7 @@
 import * as d3 from "d3"
 
 const WRAPPER = {
-  width: 1200,
+  width: 700,
   height: 500,
   padding: 60,
   background: '#fff'

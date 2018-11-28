@@ -31,18 +31,13 @@
 </template>
 
 <script>
-import PathInput from '@/components/PathInput'
 import {projectCreate} from '@/api/project'
 
 export default {
-  components: {PathInput},
   data () {
     return {
       path: '',
-      dialog: false,
-      projectPath: '',
-      search: null,
-      dirs: ['home', 'vitalii', 'src', 'POLECMNIE']
+      dialog: false
     }
   },
   methods: {

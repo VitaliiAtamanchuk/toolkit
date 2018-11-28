@@ -16,8 +16,8 @@ FILES_REGEX_TO_SKIP_ATGITSTATS = [r'_generated.py', r'alembic_default/versions']
 
 
 def get_all_todos(_path, project_path=None, _cache={}):
-  if (_path, project_path) in _cache:
-    return _cache[(_path, project_path)]
+  # if (_path, project_path) in _cache:
+  #   return _cache[(_path, project_path)]
   if project_path is None:
     project_path = _path
   path = pathlib.Path(_path)
@@ -74,7 +74,11 @@ def get_tree(_path, project_path=None, _cache={}):
       'name': curFile.name,
     }
     if curFile.is_dir():
-      item['children'] = get_tree(abs_path, project_path)
+      childs = get_tree(abs_path, project_path)
+      childs.sort(key=lambda i: i['name'].lower())
+      dirs = list(filter(lambda x: 'children' in x, childs))
+      files = list(filter(lambda x: 'children' not in x, childs))
+      item['children'] = dirs + files
       item['todos_num'] = sum(i['todos_num'] for i in item['children'])
     else:
       extension = curFile.suffix
@@ -85,6 +89,10 @@ def get_tree(_path, project_path=None, _cache={}):
       else:
         item['todos_num'] = 0
     outputTree.append(item)
+  outputTree.sort(key=lambda i: i['name'].lower())
+  dirs = list(filter(lambda x: 'children' in x, outputTree))
+  files = list(filter(lambda x: 'children' not in x, outputTree))
+  outputTree = dirs + files
   _cache[(_path, project_path)] = outputTree
   return outputTree
 
@@ -132,8 +140,8 @@ def get_todos(abs_path, project_path, no_git=False):
 
 
 def get_stats(project_path,_cache={}):
-  if project_path in _cache:
-    return _cache[project_path]
+  # if project_path in _cache:
+  #   return _cache[project_path]
   retval = []
   repo = Repo(project_path)
   if repo.bare:

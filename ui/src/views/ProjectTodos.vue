@@ -7,7 +7,7 @@
       <v-btn @click="openAllExpPanels">Open All</v-btn>
       <v-btn @click="closeAllExpPanels">Close All</v-btn>
     </div>
-    <v-combobox 
+    <v-combobox
       solo
       chips
       multiple
@@ -24,7 +24,7 @@
         :key="i"
         class='indigo lighten-3'
       >
-        <div slot="header">{{todo.abs_path}} - <span class='red--text'>{{todo.num}}</span></div>
+        <div slot="header" class='subheading'>{{todo.abs_path}} - <span class='red--text'>{{todo.num}}</span></div>
         <v-divider/>
         <v-card>
           <v-card-text>
@@ -33,7 +33,7 @@
                 <v-list-tile>
                   <v-list-tile-content>
                     <v-list-tile-title class='title'>
-                      {{item.line_num}}: - 
+                      {{item.line_num}}: -
                       {{item.text}}
                     </v-list-tile-title>
                     <v-list-tile-sub-title class="subheading my-1">
@@ -47,7 +47,7 @@
                 <v-divider/>
               </template>
             </v-list>
-            
+
           </v-card-text>
         </v-card>
       </v-expansion-panel-content>
@@ -80,7 +80,7 @@ export default {
         let items = todo.todo_items.filter(item => {
           if (this.selectedAuthors.length) {
             return this.selectedAuthors.includes(item.author)
-          } 
+          }
           return true
         })
         if (items.length) {
