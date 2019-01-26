@@ -3,11 +3,10 @@ import Router from 'vue-router'
 
 import Home from './views/Home.vue'
 import Projects from './views/Projects.vue'
-import Postgres from './views/Postgres.vue'
-import ProjectView from './views/ProjectView.vue'
-import ProjectTodos from './views/ProjectTodos.vue'
-import ProjectGitStats from './views/ProjectGitStats.vue'
-import ProjectAnalyzeVue from './views/ProjectAnalyzeVue.vue'
+import BuildSQLQuery from './views/BuildSQLQuery.vue'
+import Statistics from './views/Statistics.vue'
+import Pix2code from './views/Pix2code.vue'
+import GuiGenerator from './views/GuiGenerator.vue'
 
 Vue.use(Router)
 //TODO: add title support for every page
@@ -16,41 +15,32 @@ export default new Router({
     {
       path: '/',
       name: 'home',
-      component: Home
-    },
-    {
-      path: '/projects/',
-      name: 'projects',
-      component: Projects
-    },
-    {
-      path: '/postgres/',
-      name: 'postgres',
-      component: Postgres
-    },
-    {
-      path: '/project-view/:id',
-      props: true,
-      name: 'projectView',
-      component: ProjectView,
+      component: Home,
       children: [
         {
-          path: 'todos',
-          props: true,
-          name: 'projectTodos',
-          component: ProjectTodos
+          path: '/projects/',
+          name: 'projects',
+          component: Projects,
         },
         {
-          path: 'git/stats',
-          props: true,
-          name: 'projectGitStats',
-          component: ProjectGitStats
+          path: '/buildsqlquery/',
+          name: 'buildsqlquery',
+          component: BuildSQLQuery,
         },
         {
-          path: 'analyze-vue-code/',
-          props: true,
-          name: 'projectAnalyzeVue',
-          component: ProjectAnalyzeVue
+          path: '/statistics/',
+          name: 'statistics',
+          component: Statistics,
+        },
+        {
+          path: '/pix2code/',
+          name: 'pix2code',
+          component: Pix2code,
+        },
+        {
+          path: '/guigenerator/',
+          name: 'guigenerator',
+          component: GuiGenerator,
         }
       ]
     }

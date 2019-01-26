@@ -23,3 +23,10 @@ export const getFileTodos = (projectId, path) => request({
   method: 'POST',
   data: {project_id: projectId, path}
 })
+
+
+export const getVueFileHierarchy = (projectId, path) => request({
+  url: '/code-analysis/get-vue-file-hierarchy',
+  method: 'POST',
+  data: {project_id: projectId, path}
+})

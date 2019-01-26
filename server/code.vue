@@ -1,3 +1,4 @@
+<template lang="html">
   <v-layout wrap row>
     <v-flex xs12>
       <v-parallax height="250" :src="require('@/assets/black_img.jpg')">
@@ -26,6 +27,15 @@
       <TheFilters />
     </v-flex>
     <v-flex xs7 class='px-2 mt-2'>
-      <TheMain asdSds='as' />
+      <TheMain asdSds='as' sd class='sd' />
     </v-flex>
   </v-layout>
+</template>
+
+<script>
+export default {
+}
+</script>
+
+<style lang="css">
+</style>

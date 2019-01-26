@@ -16,7 +16,7 @@ def get_list_of_used_rags(code):
         #     if not prop.islower():
         #         print(f'error prop is not lower {prop}')
         # print('------'*10)
-        if i.name == 'template':
+        if i.name in ['template', 'router-view']:
             continue
         used_tags.add(i.name)
     return used_tags

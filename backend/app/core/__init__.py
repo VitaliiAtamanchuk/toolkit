@@ -156,6 +156,7 @@ def get_stats(project_path,_cache={}):
       'insertions': 0,  # commit.stats.total['insertions']
       'deletions': 0,  # commit.stats.total['deletions']
       'lines': 0,  # commit.stats.total['lines']
+      'files': len(commit.stats.files)
     }
     for name, val in commit.stats.files.items():
       if not any([name.endswith(ext) for ext in FILEEXTS_TO_INCLUDE]):

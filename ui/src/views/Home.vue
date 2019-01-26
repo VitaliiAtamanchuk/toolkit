@@ -1,56 +1,76 @@
-<template>
-  <v-container>
-    <v-layout row wrap>
-      <v-flex xs5 md3 class='mr-3'>
-        <v-card :to="{name: 'projects'}" class='pa-3'>
-          <v-responsive>
-            <v-layout justify-center>
-              <v-avatar color="indigo">
-                <v-icon dark>book</v-icon>
-              </v-avatar>
-            </v-layout>
-          </v-responsive>
-          <v-card-title class='text-xs-center'>
-            <v-layout justify-center>
-              <span class='body-2 font-weight-medium'>Projects</span>
-            </v-layout>
-          </v-card-title>
-            <v-divider />
-          <v-card-text>
-            <v-layout justify-center>
-              <span class='caption'>Manage, check stats, predict commit message, analyze project.</span>
-            </v-layout>
-          </v-card-text>
-        </v-card>
-      </v-flex>
+<template lang="html">
+  <v-app>
+    <v-navigation-drawer
+      dark
+      app
+      clipped
+      class='indigo darken-4'
+      stateless
+      value="true"
+      width='200'
+      :mini-variant='mini'
+    >
+      <v-list class="py-4" dense>
+        <v-list-tile>
+          <v-layout row justify-center v-if='!mini'>
+            <span class='blue-grey--text text--lighten-5 title'>
+              <span class='font-weight-light'>Project</span>
+              <span class="font-weight-medium">Manager</span>
+            </span>
+          </v-layout>
+          <span class='blue-grey--text text--lighten-5 title ml-2' v-else>
+            <span class="font-weight-black">PM</span>
+          </span>
+        </v-list-tile>
+      </v-list>
+      <v-list class="pt-0" dense>
+        <v-divider></v-divider>
 
-      <v-flex xs5 md3 class='mr-3'>
-        <v-card :to="{name: 'postgres'}" class='pa-3'>
-          <v-responsive>
-            <v-layout justify-center>
-              <v-avatar color="pink">
-                <v-icon dark>history</v-icon>
-              </v-avatar>
-            </v-layout>
-          </v-responsive>
-          <v-card-title class='text-xs-center'>
-            <v-layout justify-center>
-              <span class='body-2 font-weight-medium'>Postgres</span>
-            </v-layout>
-          </v-card-title>
-            <v-divider />
-          <v-card-text>
-            <v-layout justify-center>
-              <span class='caption'>View csvlogs.</span>
-            </v-layout>
-          </v-card-text>
-        </v-card>
-      </v-flex>
-    </v-layout>
-  </v-container>
+        <v-list-tile
+          v-for="item in items"
+          :key="item.title"
+          :to="{name: item.name}"
+        >
+          <v-list-tile-action>
+            <v-icon>{{ item.icon }}</v-icon>
+          </v-list-tile-action>
+
+          <v-list-tile-content>
+            <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+      </v-list>
+    </v-navigation-drawer>
+
+    <v-content class='blue-grey lighten-3'>
+      <v-btn flat icon color="black" v-if='!mini' @click='mini = true'>
+        <v-icon>keyboard_arrow_left</v-icon>
+      </v-btn>
+      <v-btn flat icon color="black" v-else @click='mini = false'>
+        <v-icon>keyboard_arrow_right</v-icon>
+      </v-btn>
+      <router-view/>
+    </v-content>
+  </v-app>
 </template>
 
 <script>
-  export default {
+export default {
+  data () {
+    return {
+      drawer: true,
+      items: [
+        { title: 'Projects', icon: 'view_agenda', name: 'projects' },
+        { title: 'Build SQL query', icon: 'build', name: 'buildsqlquery' },
+        { title: 'Pix2Code', icon: 'settings', name: 'pix2code' },
+        { title: 'GUI generator', icon: 'show_chart', name: 'guigenerator' },
+        { title: 'Statistics', icon: 'insert_chart', name: 'statistics' }
+      ],
+      mini: true
+    }
   }
+}
 </script>
+
+<style lang="css">
+</style>

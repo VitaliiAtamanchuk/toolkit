@@ -1,6 +1,6 @@
 <template lang="html">
   <v-dialog v-model="dialog" persistent max-width="600px">
-    <v-btn slot="activator" color='primary' large round>
+    <v-btn slot="activator" color='primary' round>
       Add a project
       <v-icon right dark>add</v-icon>
     </v-btn>
@@ -45,7 +45,9 @@ export default {
       this.dialog = false
     },
     submit () {
-      projectCreate(this.path)
+      projectCreate(this.path).then(resp => {
+        this.$emit('updateProjectList')
+      })
       this.dialog = false
     }
   }
